@@ -1,0 +1,14 @@
+Winamp Logo
+
+Source: https://commons.wikimedia.org/wiki/File:Winamp-logo.svg
+Original artwork: Emrrans (English Wikipedia)
+SVG vectorization: Pduive23 (Wikimedia Commons)
+License: Creative Commons Attribution-ShareAlike 3.0 Unported
+https://creativecommons.org/licenses/by-sa/3.0/
+
+The SVG is unchanged from the source. Display size is adjusted using CSS.
+The Apple touch PNG is a rasterized copy with a solid cream background and is
+provided under the same Creative Commons Attribution-ShareAlike 3.0 license.
+The Commons page also identifies the simple geometric design as public domain
+and notes possible trademark restrictions. Winamp is a third-party trademark;
+this site's use does not imply affiliation or endorsement.

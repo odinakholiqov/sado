@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#142b27">
+  <meta name="apple-mobile-web-app-title" content="Sado">
+  <title>Sado | Your Music Library</title>
+  <link rel="icon" type="image/svg+xml" href="/static/winamp-logo.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header><a href="/" class="brand" aria-label="Sado home"><img class="brand-logo" src="/static/winamp-logo.svg" width="42" height="42" alt="">Sado<span>HOME MUSIC REQUEST</span></a><span class="tag">Your personal record shelf</span></header>
+  <main>
+    <section class="intro"><p class="eyebrow">FIND A TRACK. PICK A VERSION.</p><h1>A little more music.<br>A library that's yours.</h1><p>Search Soulseek and YouTube, choose the recording you want, and bring it home to Navidrome.</p></section>
+    <form id="search-form"><label for="query">Artist, song title, or anything you remember</label><div class="search-box"><input id="query" name="query" type="search" placeholder="e.g. Nina Simone Feeling Good" required minlength="2" maxlength="200"><button id="search-button">Find Music</button></div></form>
+    <details id="playlist-panel" class="playlist-panel">
+      <summary>Import a Playlist <span>Spotify preview or CSV</span></summary>
+      <p class="muted">Imports and version choices are held only on this page and disappear on reload. Jobs persist after queueing. Importing never searches, selects recordings, skips tracks, or downloads automatically.</p>
+      <div class="import-forms">
+        <form id="spotify-form"><label for="spotify-url">Spotify playlist URL</label><div class="search-box"><input id="spotify-url" type="url" required placeholder="https://open.spotify.com/playlist/..."><button id="spotify-import">Import Preview</button></div></form>
+        <form id="csv-form"><label for="csv-file">UTF-8 CSV playlist (up to 2 MiB and 500 valid rows)</label><input id="csv-file" type="file" accept=".csv,text/csv" required><button id="csv-import">Import CSV</button><p class="muted">Columns: Title and Artist, or Track Name and Artist Name(s). Album and Duration are optional.</p></form>
+      </div>
+      <p id="playlist-notice" role="status" aria-live="polite"></p>
+      <section id="playlist-review" hidden aria-labelledby="playlist-name">
+        <div class="section-heading"><h2 id="playlist-name"></h2><button id="check-library" class="secondary">Check Library</button></div>
+        <p id="playlist-warning" class="import-warning"></p>
+        <p class="muted">Library results are possible matches, not definitive duplicates. Compare each recording; no track is skipped automatically. Find Versions, then choose the exact source/version for each track.</p>
+        <div id="playlist-tracks"></div>
+        <div class="batch-controls"><p id="playlist-summary" role="status" aria-live="polite"></p><p class="muted">Queue at most 100 chosen, non-skipped tracks per batch. Choices are available for 24 hours; find versions again if a choice expires.</p><p class="permission"><label><input id="batch-permission" type="checkbox"> I own this audio or have permission to download every selected recording.</label></p><button id="queue-selected" disabled>Queue Selected</button></div>
+      </section>
+    </details>
+    <p id="notice" role="status" aria-live="polite"></p>
+    <section id="local-section" hidden><h2>Already On Your Shelf</h2><p>Possible matches in Navidrome. Compare artist and version before downloading.</p><div id="local-results"></div></section>
+    <section id="results-section" hidden><div class="section-heading"><h2>Choose Your Recording</h2><div class="filters" role="group" aria-label="Result source"><button data-filter="all" aria-pressed="true">All</button><button data-filter="soulseek" aria-pressed="false">Soulseek</button><button data-filter="youtube" aria-pressed="false">YouTube</button></div></div><div id="playlist-result-context" hidden><p id="playlist-result-label"></p><form id="version-search-form"><label for="version-query">Refine the search for this playlist track</label><div class="search-box"><input id="version-query" type="search" required minlength="2" maxlength="200"><button>Find Versions Again</button></div></form><div class="playlist-actions"><button id="playlist-back" class="secondary">Back to Playlist Track</button><button id="single-search" class="secondary">Back to Single-Song Search</button></div></div><p id="single-permission" class="permission"><label><input id="permission" type="checkbox"> I own this audio or have permission to download it.</label></p><div id="results" class="results"></div></section>
+    <section class="downloads"><div class="section-heading"><h2>Coming Home</h2><button id="scan-button" class="secondary">Scan Again</button></div><p class="muted">Queued / Downloading / Processing / Complete</p><div id="jobs"><p class="muted">No requests yet. Find something worth keeping.</p></div></section>
+  </main>
+  <footer>Individual tracks. Your choice of version. No automatic downloads.<a href="/static/logo-credits.txt">Logo Credits</a><span>SADO</span></footer>
+</body>
+</html>

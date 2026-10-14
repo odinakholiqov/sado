@@ -1,0 +1,42 @@
+services:
+  sado:
+    build: .
+    container_name: sado
+    user: "1000:1000"
+    restart: unless-stopped
+    init: true
+    environment:
+      SLSKD_URL: http://slskd:5030
+      SLSKD_API_KEY: ${SLSKD_API_KEY:?Set SLSKD_API_KEY in .env}
+      NAVIDROME_URL: http://navidrome:4533
+      NAVIDROME_USER: ${NAVIDROME_USER:?Set NAVIDROME_USER in .env}
+      NAVIDROME_PASSWORD: ${NAVIDROME_PASSWORD:?Set NAVIDROME_PASSWORD in .env}
+      DOWNLOAD_TIMEOUT: "3600"
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - request-data:/data
+      - /home/odina/music/library:/library
+      - /home/odina/music/slskd/downloads:/downloads
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.http.routers.sado.rule=Host(`${APP_DOMAIN:-sado.barnomasoz.com}`)"
+      - "traefik.http.routers.sado.entrypoints=websecure"
+      - "traefik.http.routers.sado.tls=true"
+      - "traefik.http.routers.sado.tls.certresolver=le"
+      - "traefik.http.routers.sado.service=sado"
+      - "traefik.http.services.sado.loadbalancer.server.port=8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/api/downloads', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      start_period: 15s
+      retries: 3
+volumes:
+  request-data:
+networks:
+  web:
+    external: true
